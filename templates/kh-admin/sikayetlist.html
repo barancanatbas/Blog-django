@@ -1,0 +1,45 @@
+{% extends 'khadminlayout.html' %}
+{% load static %}
+{% block content %}
+    
+<div class="col-md-10 mx-auto mt-5">
+    <div class="row">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible mx-auto mt-4 fade show col-md-9" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+    <table class="table table-light mt-2">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">isim</th>
+                <th scope="col">başlık</th>
+                <th scope="col">işlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sikayet in sikayetler %}
+            {% if sikayet.read %}
+            <tr class="table-success">
+            {% else %}
+            <tr class="table-danger">
+            {% endif %}
+                <th scope="row">{{ sikayet.id }}</th>
+
+                <td>{{ sikayet.name }}</td>
+                <td>{{ sikayet.title }}</td>
+                <td><a href="{{ sikayet.get_incele_url }}" class="btn btn-info">İncele</a>
+                    <a href="{{ sikayet.get_delete_url }}" class="btn btn-danger ml-2">Sil</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

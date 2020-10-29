@@ -1,0 +1,47 @@
+{% extends 'khadminlayout.html' %}
+
+{% block content %}
+<div class="col-md-10 mx-auto mt-5">
+  <div class="row">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible mx-auto mt-4 fade show col-md-9" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
+  <form class="form-inline my-2 my-lg-0 mb-5" action="{% url 'index' %}" method="GET">
+    
+    <input class="form-control mr-sm-2" type="search" name="q" placeholder="Search" aria-label="Search"
+      value="{{ request.GET.q }}">
+    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Ara</button>
+  </form>
+  <table class="table table-light mt-2">
+    <a href="{% url 'create' %}" class="btn btn-success mt-5">Yeni Post</a>
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Başlık</th>
+        <th scope="col">işlemler</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for post in posts %}
+      <tr>
+        <th scope="row">{{ post.id }}</th>
+
+        <td>{{ post.title }}</td>
+        <td><a href="{{ post.get_update_url }}" class="btn btn-info">Düzenle</a><a href="{{ post.get_delete_url }}"
+            class="btn btn-danger ml-2">Sil</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+{% endblock %}

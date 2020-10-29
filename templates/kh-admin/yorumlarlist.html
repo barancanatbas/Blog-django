@@ -1,0 +1,47 @@
+{% extends 'khadminlayout.html' %}
+{% load static %}
+
+{% block content %}
+    
+
+<div class="col-md-10 mx-auto mt-5">
+    <div class="row">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible mx-auto mt-4 fade show col-md-9" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+    <table class="table table-light mt-2">
+        
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">isim</th>
+                <th scope="col">yorum</th>
+                <th scope="col">Tarih</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for yorum in yorumlar %}
+            <tr>
+                <th scope="row">{{ yorum.id }}</th>
+
+                <td>{{ yorum.name }}</td>
+                <td>{{ yorum.comment }}</td>
+                <td>{{ yorum.comment_date_time |timesince }} önce</td>
+                <td><a href="{{ yorum.get_delete_url }}" class="btn btn-danger ml-2">Sil</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container-fuild">
+        <div style="margin-bottom: 20%;" class="col-md-9 mx-auto">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h2 class="mt-5">Bildir !</h2>
+                <div class="form-group mt-3">
+                    {{ form|crispy }}
+                    {{ form.media }}
+                </div>
+                <div class="form-group mt-3">
+                    <input type="submit" class="btn btn-lg btn-success" value="ekle">
+                </div>
+
+            </form>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

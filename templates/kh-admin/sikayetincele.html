@@ -1,0 +1,34 @@
+{% extends 'khadminlayout.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+              <h4>{{ report.name }} <h6>{{ report.datetime | timesince }} önce</h6> </h4>
+              
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{ report.title }}</h5>
+              <p class="card-text">{{ report.content }}</p>
+              <button class="btn btn-primary" data-toggle="collapse" data-target="#sendmailform">Cevap Yaz</button>
+              <div class="collapse" id="sendmailform">
+                <form method="POST" class="col-md-10 mx-auto mt-5">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Başlık</label>
+                      <input type="text" class="form-control" name="title" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Başlık">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Mesaj</label>
+                      <textarea class="form-control" name="mesaj" id="exampleFormControlTextarea1" placeholder="Mesaj" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Gönder</button>
+                  </form>
+              </div>
+            </div>
+          </div>
+    </div>
+    
+    
+{% endblock %}

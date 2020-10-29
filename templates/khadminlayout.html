@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+</head>
+<body style="background-color: #e1e1e1;">
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a href="#" class="navbar-brand">
+            <img src="{% static 'proje-image/navbaricon.png' %}" height="28"><b class="mt-1 ml-2">KH-ADMİN</b>
+        </a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav">
+                <a href="{% url 'index' %}" class="nav-item nav-link active"><h6>Postlar</h6></a>
+                <a href="{% url 'kategorilerlist' %}" class="nav-item nav-link active"><h6>Kategoriler</h6></a>
+                <a href="{% url 'sikayet' %}" class="nav-item nav-link active"><h6>Şikayetler</h6></a>
+                <a href="{% url 'yorumlarlist' %}" class="nav-item nav-link active"><h6>Yorumlar</h6></a>
+                <a href="{% url 'ayarlar' %}" class="nav-item nav-link active"><h6>Site Ayarları</h6></a>
+            </div>
+            <div class="navbar-nav ml-auto">
+                {% if request.user.is_authenticated %}
+                    <a href="#" class="nav-item nav-link">Profile</a>
+                    <a href="{% url 'logout' %}" class="nav-item nav-link">Çıkış Yap</a>
+                {% endif %}
+                
+            </div>
+        </div>
+    </nav>
+
+            
+        
+      
+    <div class="container col-md-9"></div>
+            {% block content %}
+
+            {% endblock %}
+    </div>
+    
+    
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+</html>

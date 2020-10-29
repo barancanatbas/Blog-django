@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+<div class="row col-md-9 mx-auto">
+    <div class="col-md-2 mt-3 bg-white">
+        <div class="dropdown-menu"></div>
+        <h3 class="text-center mt-5 mb-2">Kategoriler</h3>
+            <form action="{% url 'post' %}" method="GET">
+            {% for kategori in kategoriler %}
+                
+                    <button class="dropdown-item btn text-center mt-3" name="k" value="{{ kategori.kategoriad }}"><h6 style="background-color: #eeeeee;" >{{ kategori }}</h6></button>
+            
+            {% endfor %}
+            </form>
+    </div>
+    
+    <div class="col-md-10">
+        
+        {% for post in page_obj %}
+            <div class="card text-center mb-2 mt-3">
+                <div class="card-header">
+                    Yazar : {{ post.user.get_full_name }}
+                </div>
+                <div class="card-body">
+                        <img width="60px" height="50px" src="{% static 'proje-image/document.png'%}" alt="">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <a href="{{ post.get_detail_url }}" class="btn btn-outline-primary">Detay</a>
+                </div>
+                <div class="card-footer text-muted">
+                    {{post.publising_date|timesince}} önce
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="row col-md-4 mx-auto mt-5">
+        <nav class="Page navigation example mx-auto mt-5">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <h5><a class="page-link" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&laquo; Baş</a></h5>
+                </li>
+                <li class="page-item">
+                    <h5><a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Geri</a></h5>
+                </li>
+                {% endif %}
+                <li class="page-item mt-2 ml-2 mr-2">
+                    <h5>{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}.</h5>
+                </li>
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <h5><a class="page-link" href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">İleri</a></h5>
+                </li>
+                <li class="page-item">
+                    <h5><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Son &raquo;</a></h5>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>  
+
+
+{% endblock %}

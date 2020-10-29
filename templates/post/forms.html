@@ -1,0 +1,19 @@
+{% extends 'khadminlayout.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    <div class="container-fuild">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <h2>Yeni Post</h2>
+                    {{ form|crispy }}
+                    {{ form.media }}
+                    <input type="submit" class="btn btn-lg btn-success" value="ekle">
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
